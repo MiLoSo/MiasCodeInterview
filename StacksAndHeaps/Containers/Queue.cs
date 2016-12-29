@@ -20,8 +20,8 @@ namespace StacksAndHeaps.Containers
         //remove first item
         public T Dequeue()
         {
-            T value = lList.GetHead();
-            lList.RemoveHead();
+            T value = lList.Get(0);
+            lList.RemoveFirst();
             return value;
         }
 
@@ -35,7 +35,7 @@ namespace StacksAndHeaps.Containers
         //peek at top element
         public T Peek()
         {
-            return lList.GetHead();
+            return lList.Get(0);
         }
 
         //return size of stack

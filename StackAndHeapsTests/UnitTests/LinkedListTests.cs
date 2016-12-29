@@ -27,7 +27,7 @@ namespace StackAndHeapsTests.UnitTests
         {
             myLinkedList<int> lList = new myLinkedList<int>();
             Assert.AreEqual(lList.Size(), 0);
-            lList.RemoveHead();
+            lList.RemoveFirst(); //remove head
         }
 
         [TestMethod]
@@ -37,7 +37,7 @@ namespace StackAndHeapsTests.UnitTests
             Assert.AreEqual(lList.Size(), 0);
             lList.AddHead(1);
             Assert.AreEqual(lList.Size(), 1);
-            lList.RemoveHead();
+            lList.RemoveFirst();
             Assert.AreEqual(lList.Size(), 0);
         }
 
@@ -72,9 +72,9 @@ namespace StackAndHeapsTests.UnitTests
             lList.AddTail(3); // 2
             lList.AddTail(4);
 
-            int value = lList.GetHead();
+            int value = lList.Get(0);
             Assert.AreEqual(value, 1);
-            Assert.AreEqual(lList.GetTail(), 4);
+            Assert.AreEqual(lList.Get(lList.Size()-1), 4);
             Assert.AreEqual(lList.Get(2), 3);
         }
 
@@ -87,9 +87,9 @@ namespace StackAndHeapsTests.UnitTests
             lList.AddTail(3); // 2
             lList.AddTail(4);
             Assert.AreEqual(4, lList.Size());
-            int value = lList.GetHead();
+            int value = lList.Get(0);
             Assert.AreEqual(value, 1);
-            Assert.AreEqual(lList.GetTail(), 4);
+            Assert.AreEqual(lList.Get(lList.Size()-1), 4);
             Assert.AreEqual(lList.Get(2), 3);
             Assert.AreEqual(4, lList.Size());
         }

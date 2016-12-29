@@ -22,15 +22,15 @@ namespace StacksAndHeaps.Containers
         {
             if (Count() < 1) //if there are no element,
                 return default(T); //return null.
-            T value = lList.GetHead();
-            lList.RemoveHead();
+            T value = lList.Get(0);
+            lList.RemoveFirst();
             return value;            
         }
 
         //peek at top element
         public T Peek()
         {
-            return lList.GetHead();
+            return lList.Get(0);
         }
 
         //return size of stack

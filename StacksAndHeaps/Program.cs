@@ -40,8 +40,8 @@ namespace StacksAndHeaps
             }
             Console.WriteLine(" ");
             Console.WriteLine("Value at 3rd spot: " + lList.Get(3));
-            Console.WriteLine("head: " + lList.GetHead());
-            Console.WriteLine("tail: " + lList.GetTail());
+            Console.WriteLine("head: " + lList.Get(0));
+            Console.WriteLine("tail: " + lList.Get(lList.Size()));
 
             Console.ReadLine();
         }

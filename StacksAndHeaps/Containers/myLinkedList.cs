@@ -95,16 +95,30 @@ namespace StacksAndHeaps.Containers
 
         public void RemoveFirst()
         {
-            Remove(0);
+            remove(0);
         }
         public void RemoveLast()
         {
-            Remove(size - 1);
-        }
-        public void Remove(int index)
+            remove(size - 1);
+        }   
+        public void RemoveAt(int index)
         {
-            Node<T> node = getNode(index);
-            // TODO
+            remove(index);
+        }             
+        private void remove(int index)
+        {//note: doing it this way means I have to go through the list twice,
+            //instead of once, as I did before.
+            Node<T> node = getNode(index); //find current node
+            size--;
+            if (index == 0)
+            {
+                head = node.next;
+                return;
+            }
+            Node<T> prevNode = getNode(index - 1); //find prev node, so I can couple to node.next
+            prevNode.next = node.next;
+            
+            
         }
     }
 }
