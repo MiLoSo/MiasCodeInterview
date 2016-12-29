@@ -75,7 +75,23 @@ namespace StackAndHeapsTests.UnitTests
             int value = lList.GetHead();
             Assert.AreEqual(value, 1);
             Assert.AreEqual(lList.GetTail(), 4);
-            Assert.AreEqual(lList.Get(2), 3);  
+            Assert.AreEqual(lList.Get(2), 3);
+        }
+
+        [TestMethod]
+        public void GetAndSizeTest()
+        {
+            myLinkedList<int> lList = new myLinkedList<int>();
+            lList.AddTail(1); // 0
+            lList.AddTail(2); // 1
+            lList.AddTail(3); // 2
+            lList.AddTail(4);
+            Assert.AreEqual(4, lList.Size());
+            int value = lList.GetHead();
+            Assert.AreEqual(value, 1);
+            Assert.AreEqual(lList.GetTail(), 4);
+            Assert.AreEqual(lList.Get(2), 3);
+            Assert.AreEqual(4, lList.Size());
         }
     }
 }
