@@ -1,0 +1,7 @@
+c:\users\mia\documents\visual studio 2015\Projects\StacksAndHeaps\StackAndHeapsTests\bin\Debug\StackAndHeapsTests.dll
+c:\users\mia\documents\visual studio 2015\Projects\StacksAndHeaps\StackAndHeapsTests\bin\Debug\StackAndHeapsTests.pdb
+c:\users\mia\documents\visual studio 2015\Projects\StacksAndHeaps\StackAndHeapsTests\bin\Debug\StacksAndHeaps.exe
+c:\users\mia\documents\visual studio 2015\Projects\StacksAndHeaps\StackAndHeapsTests\bin\Debug\StacksAndHeaps.pdb
+c:\users\mia\documents\visual studio 2015\Projects\StacksAndHeaps\StackAndHeapsTests\obj\Debug\StackAndHeapsTests.csprojResolveAssemblyReference.cache
+c:\users\mia\documents\visual studio 2015\Projects\StacksAndHeaps\StackAndHeapsTests\obj\Debug\StackAndHeapsTests.dll
+c:\users\mia\documents\visual studio 2015\Projects\StacksAndHeaps\StackAndHeapsTests\obj\Debug\StackAndHeapsTests.pdb

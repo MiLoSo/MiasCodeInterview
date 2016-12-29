@@ -1,0 +1,6 @@
+c:\users\mia\documents\visual studio 2015\Projects\StacksAndHeaps\StacksAndHeaps\bin\Debug\StacksAndHeaps.exe.config
+c:\users\mia\documents\visual studio 2015\Projects\StacksAndHeaps\StacksAndHeaps\obj\Debug\StacksAndHeaps.csprojResolveAssemblyReference.cache
+c:\users\mia\documents\visual studio 2015\Projects\StacksAndHeaps\StacksAndHeaps\bin\Debug\StacksAndHeaps.exe
+c:\users\mia\documents\visual studio 2015\Projects\StacksAndHeaps\StacksAndHeaps\bin\Debug\StacksAndHeaps.pdb
+c:\users\mia\documents\visual studio 2015\Projects\StacksAndHeaps\StacksAndHeaps\obj\Debug\StacksAndHeaps.exe
+c:\users\mia\documents\visual studio 2015\Projects\StacksAndHeaps\StacksAndHeaps\obj\Debug\StacksAndHeaps.pdb
