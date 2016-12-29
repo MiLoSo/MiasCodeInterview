@@ -13,67 +13,6 @@ namespace StacksAndHeaps.Containers
 
         int size = 0;
 
-        public void RemoveAt(int index)
-        {
-            if (index > size || index < 0)
-                throw new Exception("index beyond length of linked list.");
-
-            Node<T> current = head;
-            int n = 0;
-            while (n < index-1 && current.next != null)
-            {
-                current = current.next;
-                n++;
-            }
-            RemoveAfterNode(current);
-
-        }
-
-        public void RemoveHead()
-        {
-            RemoveAfterNode(null);
-        }
-
-        public void RemoveLast()
-        {
-            if (tail == null)
-                throw new Exception("index beyond length of linked list.");
-
-            Node<T> current = head;
-            while (current.next != null)
-            {
-                current = current.next;
-            }
-            RemoveAfterNode(current);
-        }
-
-        public T Get(int index)
-        {
-            Node<T> node = getNode(index);
-            if (node != null)
-                return node.value;
-            else
-                throw new Exception("index beyond length of linked list.");
-        }
-
-        public T GetHead()
-        {
-            Node<T> node = getNode(0);
-            if (node != null)
-                return node.value;
-            else
-                throw new Exception("index beyond length of linked list.");
-        }
-
-        public T GetTail()
-        {
-            Node<T> node = getNode(size-1);
-            if (node != null)
-                return node.value;
-            else
-                throw new Exception("index beyond length of linked list.");
-        }
-
         public int Size()
         {
             return size;
@@ -85,7 +24,7 @@ namespace StacksAndHeaps.Containers
             tail = null;
             size = 0;
         }
-        
+
         private Node<T> getNode(int index)
         {
             if (index >= size || index < 0)
@@ -102,39 +41,11 @@ namespace StacksAndHeaps.Containers
             }
             return current;
         }
-
-        private void RemoveAfterNode(Node<T> n)
-        {     
-            if (n == null && head != null)
-            {//if there is a next, it's the new head.
-                if (head.next != null)
-                    head = head.next;
-                else //if not, both are null.
-                {
-                    head = null;
-                    tail = null;
-                }
-            }
-            else if (head == null)
-            {     
-                throw new IndexOutOfRangeException("Cannot remove node: out of range exception.");
-            }else if (size == 1)
-            {
-                n = null;
-            }
-
-            //if there are more nodes after, add them as the new next.
-            if (n != null && n.next != null)
-            {
-                Node<T> tempNode = n.next.next;
-                n.next = tempNode;
-            } else if (n != null)
-            {   //else, next is null.
-                n.next = null;
-            }
-            size--;
+        public T Get(int index)
+        {
+            return getNode(index).value;
         }
-
+        
         private void AddAfterNode(Node<T> n, T value)
         {
             size++;
@@ -179,6 +90,21 @@ namespace StacksAndHeaps.Containers
         public void AddBefore(int index, T value)
         {
             AddAfterNode(getNode(index - 1), value);
+        }
+
+
+        public void RemoveFirst()
+        {
+            Remove(0);
+        }
+        public void RemoveLast()
+        {
+            Remove(size - 1);
+        }
+        public void Remove(int index)
+        {
+            Node<T> node = getNode(index);
+            // TODO
         }
     }
 }
