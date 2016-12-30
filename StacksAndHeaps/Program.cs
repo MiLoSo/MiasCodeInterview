@@ -4,60 +4,54 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StacksAndHeaps.Containers;
+using StacksAndHeaps.Data;
 
 namespace StacksAndHeaps
 {
     class Program
     {
-        public static void TestLinkedList()
-        {
-            Node<int> head = new Node<int>()
-            {
-                value = 1
-            };
-            myLinkedList<int> lList = new myLinkedList<int>();
-            lList.AddHead(2);
-            lList.AddHead(1);
-            lList.AddTail(3);
-            lList.AddAfter(4, 2);
-
-            lList.RemoveLast();
-
-            lList.AddTail(5);
-            lList.AddTail(6);
-
-            lList.RemoveAt(3);
-
-            // Print kun index 1 ud
-
-            Node<int> current = lList.head;
-            int n = 0;
-            while (current != null)
-            {
-                Console.WriteLine(current.value);
-                current = current.next;
-                n++;
-            }
-            Console.WriteLine(" ");
-            Console.WriteLine("Value at 3rd spot: " + lList.Get(3));
-            Console.WriteLine("head: " + lList.Get(0));
-            Console.WriteLine("tail: " + lList.Get(lList.Size()));
-
-            Console.ReadLine();
-        }
-
-        public static void TestStacks()
-        {
-            Console.ReadLine();
-
-            Node<int> n = new Node<int>();
-        }
-
         static void Main(string[] args)
         {
-            //TestLinkedList();
-            TestStacks();
+            /*ListNames((name) => {
+                Console.WriteLine(name + " is awesome");
+            });*/
+            BinaryTree<int> tree = new BinaryTree<int>();
+            tree.Add(5);
+            tree.Add(10);
+            tree.Add(3);
+            tree.Add(11);
+            tree.Add(3);
+            tree.Add(4);
+            tree.Add(9);
+            //tree.Remove(3);
 
+            int n = 0;
+            BinaryTreeNode<int> node = tree.root;
+
+            /* tree.TransversePostOrder((value) => {
+                 Console.WriteLine(value + " ");
+             });*/
+
+            /*tree.TraversePreOrder((value) => {
+                Console.WriteLine(value + " ");
+            });*/
+            tree.TraverseInOrder((value) => {
+                Console.WriteLine(value + " ");
+            });
+            Console.WriteLine("Done.");
+            Console.ReadLine();
+        }
+
+        
+
+        static void ListNames(Action<string> action)
+        {
+            List<String> names = new List<string>() { "Kasper", "Mia", "Yingmei" };
+            foreach(string name in names)
+            {
+                action(name);
+            }
+            // 
         }
     }
 

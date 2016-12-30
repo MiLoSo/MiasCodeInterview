@@ -47,6 +47,7 @@
     <Compile Include="Containers\myStack.cs" />
     <Compile Include="Containers\Node.cs" />
     <Compile Include="Containers\Queue.cs" />
+    <Compile Include="Data\BinaryTree.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
