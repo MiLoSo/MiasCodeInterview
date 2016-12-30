@@ -25,14 +25,11 @@ namespace StacksAndHeaps.Data
             }
             //otherwise, find best place:
             BinaryTreeNode<T> current = root;
-            while (true)
+            while (current != null)
             {
-                if (current == null) { //we've found the correct node.
-                    current = newNode; //doesn't work for root.
-                    return;
-                }
+                //follow right branch / add
                 if (value.CompareTo(current.value) > 0)
-                {//follow right branch / add
+                {
                     if (current.right == null) {
                         current.right = newNode;
                         return;
@@ -40,15 +37,17 @@ namespace StacksAndHeaps.Data
                     else
                         current = current.right;
                 }
+                //follow left branch / add
                 else
-                {//follow left branch / add
+                {
                     if (current.left == null)
                     {
                         current.left = newNode;
                         return;
                     }
                     else
-                        current = current.left; //evt a recursive function that takes next node as input Add(root, value)
+                        //evt a recursive function that takes next node as input Add(root, value)
+                        current = current.left; 
                 }
             }
         }
@@ -62,7 +61,8 @@ namespace StacksAndHeaps.Data
             {
                 //if no prev node, it's the root.
                 if (value.CompareTo(current.value) > 0)
-                {//follow right branch / add
+                {
+                    //follow right branch / add
                     if (current.right == null)
                         throw new Exception("Value not found");
                     if (value.CompareTo(current.right.value) == 0) //if correct value, remove:
@@ -74,7 +74,8 @@ namespace StacksAndHeaps.Data
                         current = current.right;
                 }
                 else
-                {//follow left branch / add
+                {
+                    //follow left branch / add
                     if (current.left == null)
                         throw new Exception("Value not found");
                     if (value.CompareTo(current.left.value) == 0) //if correct value, remove:
@@ -119,11 +120,14 @@ namespace StacksAndHeaps.Data
             //if parent.child's left and right nodes can be directly parented to the parent(no other children), do it.
             //else, look to the parent's other children
         }
+
+
         //depth first. Visit all children before the node itself.
         //visit all the left nodes first, from the closest (and outermost) first.
         //then the right, closest, and outmost right children.
         public void TransversePostOrder(Action<T> action)
-        {//recursive?
+        {
+            //recursive?
             TransversePostOrder(root, action);
         }
         private void TransversePostOrder(BinaryTreeNode<T> parent, Action<T> action)
@@ -156,7 +160,6 @@ namespace StacksAndHeaps.Data
         {
             TraverseInOrder(root, action);
         }
-
         private void TraverseInOrder(BinaryTreeNode<T> parent, Action<T> action)
         {
             if (parent != null)
