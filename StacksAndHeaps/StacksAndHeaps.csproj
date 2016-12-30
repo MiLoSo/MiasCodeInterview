@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Containers\DynamicArray.cs" />
     <Compile Include="Containers\myLinkedList.cs" />
     <Compile Include="Containers\myStack.cs" />
     <Compile Include="Containers\Node.cs" />

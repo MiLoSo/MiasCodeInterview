@@ -12,6 +12,30 @@ namespace StacksAndHeaps.Containers.Tests
     public class DynamicArrayTests
     {
         [TestMethod()]
+        public void addToArray()
+        {
+            DynamicArray<int> array = new DynamicArray<int>();
+            array.Add(5);
+            Assert.AreEqual(1, array.Size());
+            Assert.AreEqual(5, array.Get(0));
+        }
+
+        [TestMethod()]
+        public void checkArraySize()
+        {
+            DynamicArray<int> array = new DynamicArray<int>();
+            array.Add(5);
+            array.Add(4);
+            Assert.AreEqual(2, array.Size());
+            array.Add(3);
+            Assert.AreEqual(3, array.Size());
+            array.Add(2);
+            array.Add(1);
+            Assert.AreEqual(5, array.Size());
+            Assert.AreEqual(3, array.Get(2));
+        }
+
+        [TestMethod()]
         public void verifyEmptyArray()
         {
             DynamicArray<int> array = new DynamicArray<int>();
@@ -25,7 +49,7 @@ namespace StacksAndHeaps.Containers.Tests
             array.Add(1);
             array.Add(2);
             array.Add(3);
-            Assert.AreEqual(3, array.Size());
+            Assert.AreEqual(3, array.Size()); //??
         }
 
         [TestMethod()]
@@ -39,7 +63,6 @@ namespace StacksAndHeaps.Containers.Tests
             Assert.AreEqual(1, array.Get(0));
             Assert.AreEqual(2, array.Get(1));
             Assert.AreEqual(3, array.Get(2));
-            Assert.AreEqual(0, array.Size());
         }
 
         [TestMethod()]
@@ -55,7 +78,6 @@ namespace StacksAndHeaps.Containers.Tests
             {
                 Assert.AreEqual(i, array.Get(i));
             }
-            Assert.AreEqual(0, array.Size());
         }
 
         [TestMethod()]
@@ -66,11 +88,13 @@ namespace StacksAndHeaps.Containers.Tests
             {
                 array.Add(i);
             }
+            int test = array.Size();
             Assert.AreEqual(100000, array.Size());
             for (int i = 0; i < 100; i++)
             {
                 array.Remove(i);
             }
+            test = array.Size();
             Assert.AreEqual(100000 - 100, array.Size());
         }
 
@@ -109,6 +133,7 @@ namespace StacksAndHeaps.Containers.Tests
                 array.Add(999999 + i);
             }
             Assert.AreEqual(100000 - 100 + 200, array.Size());
+            int test = array.Get(1);
             Assert.AreEqual(100, array.Get(0));
             Assert.AreEqual(999999 + 199, array.Get(array.Size() - 1));
         }
