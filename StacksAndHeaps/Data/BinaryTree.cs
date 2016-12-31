@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StacksAndHeaps.Containers;
 
 namespace StacksAndHeaps.Data
 {
@@ -139,6 +140,48 @@ namespace StacksAndHeaps.Data
                 action(parent.value);
             }
         }
+        public void nonRecursiveTransversePostOrder(Action<T> action)
+        {
+            //non recursive post order
+            Stack<BinaryTreeNode<T>> toVisit = new Stack<BinaryTreeNode<T>>();
+            //Stack<BinaryTreeNode<T>> visited = new Stack<BinaryTreeNode<T>>();
+            BinaryTreeNode<T> current = root;
+            Dictionary<BinaryTreeNode<T>, Boolean> visited = new Dictionary<BinaryTreeNode<T>, bool>();
+            toVisit.Push(root);
+            while (toVisit.Count != 0)
+            {
+                current = toVisit.Peek();
+                //add root toVisit
+                //check if children,
+                // add right, then left.
+                //next run: check top, which is the left.
+                //if node has no children (that haven't been visited)
+                //action(node) and pop
+                //if there are no children / they have been visited, add and action.
+                if (current.left == null || current.left != null && visited.ContainsKey(current.left))
+                {
+
+                    if (current.right == null || current.right != null && visited.ContainsKey(current.right))
+                    {
+                        visited.Add(current, true);
+                        toVisit.Pop();
+                        action(current.value);
+                        continue;
+                    }
+                }
+
+                if (current.right != null || current.right != null && !visited.ContainsKey(current.right))
+                {
+                    toVisit.Push(current.right);
+                }
+                if (current.left != null || current.left != null && !visited.ContainsKey(current.left))
+                {
+                    toVisit.Push(current.left);
+                }
+                
+
+            }
+        }
 
         //visit the node before the children.
         public void TraversePreOrder(Action<T> action)
@@ -154,7 +197,31 @@ namespace StacksAndHeaps.Data
                 TraversePreOrder(parent.right, action);
             }
         }
+        public void nonRecursiveTransversePreOrder(Action<T> action)
+        {
+            Stack<BinaryTreeNode<T>> toVisit = new Stack<BinaryTreeNode<T>>();
+            BinaryTreeNode<T> current = root;
+            Dictionary<BinaryTreeNode<T>, Boolean> visited = new Dictionary<BinaryTreeNode<T>, bool>();
+            toVisit.Push(root);
+            while (toVisit.Count != 0)
+            {
+                current = toVisit.Peek();
+                visited.Add(current, true);
+                toVisit.Pop();
+                action(current.value);
 
+                if (current.right != null || current.right != null && !visited.ContainsKey(current.right))
+                {
+                    toVisit.Push(current.right);
+                }
+                if (current.left != null || current.left != null && !visited.ContainsKey(current.left))
+                {
+                    toVisit.Push(current.left);
+                }
+
+
+            }
+        }
         //visit left node, then the node itself, then the right node. For binary trees.
         public void TraverseInOrder(Action<T> action)
         {
@@ -167,6 +234,36 @@ namespace StacksAndHeaps.Data
                 TraverseInOrder(parent.left, action);
                 action(parent.value);
                 TraverseInOrder(parent.right, action);
+            }
+        }
+        public void nonRecursiveTraverseInOrder(Action<T> action)
+        {
+            Stack<BinaryTreeNode<T>> toVisit = new Stack<BinaryTreeNode<T>>();
+            BinaryTreeNode<T> current = root;
+            Dictionary<BinaryTreeNode<T>, Boolean> visited = new Dictionary<BinaryTreeNode<T>, bool>();
+            toVisit.Push(root);
+            while (toVisit.Count != 0)
+            {
+                current = toVisit.Peek();
+                //only print if no more left nodes.
+                if (current.left == null || current.left != null && visited.ContainsKey(current.left))
+                {
+                    visited.Add(current, true);
+                    toVisit.Pop();
+                    action(current.value);
+                    continue;
+                }
+                if (current.right != null || current.right != null && !visited.ContainsKey(current.right))
+                {
+                    BinaryTreeNode<T> temp = toVisit.Pop();
+                    toVisit.Push(current.right);
+                    toVisit.Push(current);
+                }
+                if (current.left != null || current.left != null && !visited.ContainsKey(current.left))
+                {
+                    toVisit.Push(current.left);
+                } 
+
             }
         }
     }

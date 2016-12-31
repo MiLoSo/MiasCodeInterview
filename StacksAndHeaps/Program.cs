@@ -35,7 +35,11 @@ namespace StacksAndHeaps
             /*tree.TraversePreOrder((value) => {
                 Console.WriteLine(value + " ");
             });*/
-            tree.TraverseInOrder((value) => {
+            /*tree.TraverseInOrder((value) => {
+                Console.WriteLine(value + " ");
+            });*/
+            
+            tree.nonRecursiveTransversePostOrder((value) => {
                 Console.WriteLine(value + " ");
             });
             Console.WriteLine("Done.");
