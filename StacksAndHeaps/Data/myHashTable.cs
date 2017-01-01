@@ -6,68 +6,154 @@ using System.Threading.Tasks;
 
 namespace StacksAndHeaps.Data
 {
-    public class myHashTable<T> where T : IComparable
+    public class myHashTable<T, U> where T : IComparable
     {
-        private T[] internalArray = new T[1];
+        private HashNode<T, U>[] internalArray = new HashNode<T, U>[1];
+        private int count = 0;
+        private double maxLoad = 0.7;
 
-        //The Open Addressing version
-        public void AddOA(T value)
+        // TODO: Overskriv hvis den given key allerede eksisterer
+        // HINT: Brug Get
+        public void Add(T key, U value)
         {
-            int hashCode = value.GetHashCode();
-            // first check if we can place value
-            //keep adding +1 to index until we can
-            //unless we reach the end of the array, then we go on to extent it.
-            while (internalArray.Length > hashCode && internalArray[hashCode] != null)
+            if (count / internalArray.Length > maxLoad)
             {
-                hashCode++;
+                expandArray();
             }
-            //if the array isn't long enough, make it long enough.
-            if (internalArray.Length <= hashCode)
+            add(key, value, internalArray);
+            count++;
+        }
+
+        private void expandArray()
+        {
+            var a = new HashNode<T, U>[internalArray.Length*2];
+            for (int i = 0; i < internalArray.Length; i++)
             {
-                T[] newArray = new T[hashCode+1];
-                for (int i = 0; i < internalArray.Length; i++)
+                if (internalArray[i] != null)
                 {
-                    newArray[i] = internalArray[i];
+                    add(internalArray[i].key, internalArray[i].value, a);
                 }
-                internalArray = newArray;
             }
-            internalArray[hashCode] = value;
+            internalArray = a;
         }
 
-        public T GetAtOA(int index)
+        private void add(T key, U value, HashNode<T, U>[] array)
         {
-            return internalArray[index];
-        }
-        public T GetOA(T value)
-        {
-            int hashCode = value.GetHashCode();
+            int hashCode = Math.Abs(key.GetHashCode());
+            int index = hashCode % internalArray.Length;
 
-            //while the T value at the index isn't the same as the sought value, increase.
-            while (internalArray[hashCode].CompareTo(value) != 0)
+            while (true)
             {
-                hashCode++;
+               
+                if (array[index] == null)
+                {
+                    array[index] = new HashNode<T, U>()
+                    {
+                        key = key,
+                        value = value
+                    };
+                    return;
+                }
+                //no need for logic for checking if array is full,
+                //because we have a guarantee that it never is (maxload 0.7)
+                index++;
+                if (index == array.Length)
+                {
+                    index = 0;
+                }
+            }
+        }
+
+        public U Get(T key)
+        {
+            int hashCode = Math.Abs(key.GetHashCode());
+            int startIndex = hashCode % internalArray.Length;
+            int index = startIndex;
+
+            while (true)
+            {
+                //if index is within the limits of the array, and we have found the key...
+                if (index < internalArray.Length && internalArray[index] != null &&
+                    key.CompareTo(internalArray[index].key) == 0)
+                    return internalArray[index].value;
+                //if we have reached end of array, go to beginning and continue
+                if (index == internalArray.Count() - 1)
+                {
+                    index = 0;
+                    continue;
+                }
+                //keys were compared above, so if they weren't identical,
+                //the key doesn't exist in the array...
+                if (index == startIndex - 1)
+                {
+                    return default(U);
+                }
+                //if we're not at end of array, increase index
+                index++;
+            }
+            //return internalArray[index].value;
+        }
+
+        public void Remove(T key)
+        {
+            int hashCode = Math.Abs(key.GetHashCode());
+            int startIndex = hashCode % internalArray.Length;
+            int index = startIndex;
+
+            while (true)
+            {
+                
+                if (index < internalArray.Length && internalArray[index] != null 
+                    && key.CompareTo(internalArray[index].key) == 0)
+                    internalArray[index] = null;
+                //if we have reached end of array, go to beginning and continue
+                if (index == internalArray.Count() - 1)
+                {
+                    index = 0;
+                    continue;
+                }
+                //keys were compared above, so if they weren't identical,
+                //the key doesn't exist in the array...
+                if (index == startIndex - 1)
+                {
+                    break;
+                }
+                
+                //if we're not at end of array, increase index
+                index++;
             }
             
-            return internalArray[hashCode];
         }
 
-        public int GetArraySize()
+        public T[] GetKeyList()
         {
-            return internalArray.Length;
-        }
+            // Hint: Count ved hvormange keys der er.
 
-        public void RemoveOA(T value)
-        {
-            int hashCode = value.GetHashCode();
-
-            //while the T value at the index isn't the same as the sought value, increase.
-            while (internalArray[hashCode].CompareTo(value) != 0 &&
-                internalArray.Length > hashCode)
+            //first make an array of the same size as internalarray,
+            T[] a = new T[internalArray.Count()];
+            int keys = 0;
+            for (int i  = 0; i < internalArray.Count(); i++)
             {
-                hashCode++;
+                //find the values that aren't null, and save them:
+                if (internalArray[i] != null)
+                {
+                    a[keys] = internalArray[i].key;
+                    keys++;
+                }
             }
-            if (internalArray[hashCode].CompareTo(value) != 0)
-                Console.WriteLine("Value not found in hashtable.");
+            //Now make an array of the correct size, and transfer values:
+            T[] arrayKeys = new T[keys];
+            for (int i = 0; i < keys; i++)
+            {
+                arrayKeys[i] = a[i];
+            }
+            return arrayKeys;
+        }
+
+        private class HashNode<T, U>
+        {
+            public T key;
+            public U value;
         }
     }
 }

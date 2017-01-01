@@ -10,46 +10,56 @@ namespace StackAndHeapsTests.UnitTests
         [TestMethod]
         public void AddingToHashTable()
         {
-            myHashTable<int> hashTable = new myHashTable<int>();
-            hashTable.Add(1);
-            hashTable.Add(2);
-            hashTable.Add(5);
-
-            int length = hashTable.GetArraySize();
-            for (int i = 0; i < length; i++)
-            {
-                int value = hashTable.GetAt(i);
-                if (i ==1 || i == 2 || i ==5)
-                Assert.AreEqual(i, hashTable.GetAt(i));
-            }
+            myHashTable<string, int> hashTable = new myHashTable<string, int>();
+            hashTable.Add("Kasper", 31);
+            hashTable.Add("Mia", 26);
+            hashTable.Add("Yingmei", 28);
         }
 
-        public void RemovingFromHashTable()
+        [TestMethod]
+        public void GetValue()
         {
-            myHashTable<int> hashTable = new myHashTable<int>();
-            hashTable.Add(1);
-            hashTable.Add(2);
-            hashTable.Add(3);
-            hashTable.Add(4);
-            hashTable.Add(5);
+            myHashTable<string, int> hashTable = new myHashTable<string, int>();
+            hashTable.Add("Kasper", 31);
+            hashTable.Add("Mia", 26);
+            hashTable.Add("Yingmei", 28);
 
-            int length = hashTable.GetArraySize();
-            for (int i = 0; i < length; i++)
-            {
-                Assert.AreEqual(i, hashTable.GetAt(i));
-            }
+            Assert.AreEqual(28, hashTable.Get("Yingmei"));
+            Assert.AreEqual(26, hashTable.Get("Mia"));
+            Assert.AreEqual(31, hashTable.Get("Kasper"));
+        }
 
-            hashTable.Remove(2);
-            hashTable.Remove(3);
+        [TestMethod]
+        //[ExpectedException(typeof(IndexOutOfRangeException))]
+        public void RemoveKey()
+        {
+            myHashTable<string, int> hashTable = new myHashTable<string, int>();
+            hashTable.Add("Kasper", 31);
+            hashTable.Add("Mia", 26);
+            hashTable.Add("Yingmei", 28);
+            hashTable.Remove("Kasper");
 
-            for (int i = 0; i < length; i++)
-            {
-                int value = hashTable.GetAt(i);
-                if (i >= 1 && i <= 2)
-                    Assert.AreEqual(i, 0);
-                else
-                    Assert.AreEqual(i, hashTable.GetAt(i));
-            }
+            Assert.AreEqual(28, hashTable.Get("Yingmei"));
+            Assert.AreEqual(26, hashTable.Get("Mia"));
+            Assert.AreEqual(0, hashTable.Get("Kasper"));//kasper doesn't exist
+        }
+
+        [TestMethod]
+        //[ExpectedException(typeof(IndexOutOfRangeException))]
+        public void GetKeyList()
+        {
+            myHashTable<string, int> hashTable = new myHashTable<string, int>();
+            hashTable.Add("Kasper", 31);
+            hashTable.Add("Mia", 26);
+            hashTable.Add("Yingmei", 28);
+
+            Assert.AreEqual(3, hashTable.GetKeyList().Length);
+
+            string[] a = hashTable.GetKeyList();
+
+            //remove one key, and count again:
+            hashTable.Remove("Kasper");
+            Assert.AreEqual(2, hashTable.GetKeyList().Length);
         }
     }
 }
