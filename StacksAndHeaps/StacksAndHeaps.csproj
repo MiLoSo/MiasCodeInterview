@@ -49,6 +49,7 @@
     <Compile Include="Containers\Node.cs" />
     <Compile Include="Containers\Queue.cs" />
     <Compile Include="Data\BinaryTree.cs" />
+    <Compile Include="Data\myHashTable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

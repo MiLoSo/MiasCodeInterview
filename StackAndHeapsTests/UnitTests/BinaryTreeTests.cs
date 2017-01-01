@@ -79,6 +79,9 @@ namespace StackAndHeapsTests.UnitTests
             {
                 Assert.AreEqual(expected[k], values[k]);
             }
+
+            /*string input = "abc";
+            input.GetHashCode();*/
         }
     }
 }

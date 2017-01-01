@@ -58,6 +58,7 @@
     <Compile Include="UnitTests\QueueTests.cs" />
     <Compile Include="UnitTests\LinkedListTests.cs" />
     <Compile Include="UnitTests\BinaryTreeTests.cs" />
+    <Compile Include="UnitTests\HashTableTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StacksAndHeaps\StacksAndHeaps.csproj">
